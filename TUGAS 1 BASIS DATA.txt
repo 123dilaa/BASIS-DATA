@@ -1,0 +1,106 @@
+TUGAS BASIS DATA
+
+
+MariaDB [db_kuliah]> SHOW TABLES;
++---------------------+
+| Tables_in_db_kuliah |
++---------------------+
+| jenis               |
+| mahasiswa           |
++---------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [db_kuliah]> DESC jenis;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.033 sec)
+
+MariaDB [db_kuliah]> DESC mahasiswa;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nim       | int(11)     | NO   |     | NULL    |                |
+| nama      | varchar(30) | NO   | UNI | NULL    |                |
+| alamat    | varchar(30) | NO   | UNI | NULL    |                |
+| idjurusan | int(11)     | NO   |     | NULL    |                |
+| foto      | varchar(30) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.038 sec)
+
+MariaDB [db_kuliah]> INSERT INTO jenis VALUES
+    -> ('','Teknik Informatika'), ('','Sistem Informasi'), ('','Bisnis Digital'), ('','Kedokteran'), ('','Pertanian');
+Query OK, 5 rows affected, 5 warnings (0.080 sec)
+Records: 5  Duplicates: 0  Warnings: 5
+
+MariaDB [db_kuliah]> SELECT * FROM jenis;
++----+--------------------+
+| id | nama               |
++----+--------------------+
+|  3 | Bisnis Digital     |
+|  4 | Kedokteran         |
+|  5 | Pertanian          |
+|  2 | Sistem Informasi   |
+|  1 | Teknik Informatika |
++----+--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [db_kuliah]> INSERT INTO mahasiswa
+    -> (nim,nama,alamat,idjurusan,foto) VALUES
+    -> (23245,'Fadilah','Medan',1,'dila,jpg'),
+    -> (23258,'Imelda','Riau',2,'imel.jpg'),
+    -> (23264,'Zalsa','Palembang',3,'zalsa.jpg');
+Query OK, 3 rows affected (0.015 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [db_kuliah]> SELECT * FROM mahasiswa;
++----+-------+---------+-----------+-----------+-----------+
+| id | nim   | nama    | alamat    | idjurusan | foto      |
++----+-------+---------+-----------+-----------+-----------+
+|  8 | 23245 | Fadilah | Medan     |         1 | dila,jpg  |
+|  9 | 23258 | Imelda  | Riau      |         2 | imel.jpg  |
+| 10 | 23264 | Zalsa   | Palembang |         3 | zalsa.jpg |
++----+-------+---------+-----------+-----------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [db_kuliah]> INSERT INTO mahasiswa
+    -> (nim,nama,alamat,idjurusan,foto) VALUES
+    -> (23171,'Anggi','Lampung',4,'anggi.jpg'),
+    -> (23279,'Surya','Padang',5,'surya.jpg');
+Query OK, 2 rows affected (0.016 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db_kuliah]> SELECT * FROM mahasiswa;
++----+-------+---------+-----------+-----------+-----------+
+| id | nim   | nama    | alamat    | idjurusan | foto      |
++----+-------+---------+-----------+-----------+-----------+
+|  8 | 23245 | Fadilah | Medan     |         1 | dila,jpg  |
+|  9 | 23258 | Imelda  | Riau      |         2 | imel.jpg  |
+| 10 | 23264 | Zalsa   | Palembang |         3 | zalsa.jpg |
+| 11 | 23171 | Anggi   | Lampung   |         4 | anggi.jpg |
+| 12 | 23279 | Surya   | Padang    |         5 | surya.jpg |
++----+-------+---------+-----------+-----------+-----------+
+5 rows in set (0.001 sec)
+ERROR 1054 (42S22): Unknown column 'stok' in 'field list'
+MariaDB [db_kuliah]> SELECT nim,nama,idjurusan FROM mahasiswa;
++-------+---------+-----------+
+| nim   | nama    | idjurusan |
++-------+---------+-----------+
+| 23245 | Fadilah |         1 |
+| 23258 | Imelda  |         2 |
+| 23264 | Zalsa   |         3 |
+| 23171 | Anggi   |         4 |
+| 23279 | Surya   |         5 |
++-------+---------+-----------+
+5 rows in set (0.001 sec)
+MariaDB [db_kuliah]> SELECT * FROM mahasiswa WHERE alamat='Medan';
++----+-------+---------+--------+-----------+----------+
+| id | nim   | nama    | alamat | idjurusan | foto     |
++----+-------+---------+--------+-----------+----------+
+|  8 | 23245 | Fadilah | Medan  |         1 | dila,jpg |
++----+-------+---------+--------+-----------+----------+
+1 row in set (0.001 sec)
